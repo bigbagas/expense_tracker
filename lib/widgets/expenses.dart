@@ -23,10 +23,25 @@ class _ExpensesState extends State<Expenses> {
       date: DateTime.now(),
       category: Category.leisure,
     ),
+    Expense(
+      title: 'Jajan',
+      amount: 16.3,
+      date: DateTime.now(),
+      category: Category.food,
+    ),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Expense Tracker'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.add),
+          ),
+        ],
+      ),
       body: Column(
         children: [
           const Text('Chart'),
