@@ -28,12 +28,12 @@ class ExpenseItem extends StatelessWidget {
                 const Spacer(),
                 Row(
                   children: [
-                    const Icon(Icons.work),
+                    Icon(categoryIcons[expense.category]),
                     // Text(
                     //   expense.category.toString(),
                     // ),
                     Text(
-                      expense.date.toString(),
+                      expense.formmaterDate,
                     ),
                   ],
                 ),
