@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:expense_tracker/widgets/expense_list/expenses_list.dart';
 import 'package:expense_tracker/models/expense.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
@@ -34,9 +36,22 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
-      builder: (ctx) => const NewExpense(),
+      builder: (ctx) => NewExpense(onAddExpense: _addExpense),
     );
+  }
+
+  void _addExpense(Expense expense) {
+    setState(() {
+      _listExpenses.add(expense);
+    });
+  }
+
+  void _removeExpense(Expense expense) {
+    setState(() {
+      _listExpenses.remove(expense);
+    });
   }
 
   @override
@@ -55,7 +70,11 @@ class _ExpensesState extends State<Expenses> {
         children: [
           const Text('Chart'),
           const Text("List"),
-          Expanded(child: ExpensesList(expenses: _listExpenses))
+          Expanded(
+              child: ExpensesList(
+            expenses: _listExpenses,
+            onRemoveExpense: _removeExpense,
+          ))
         ],
       ),
     );
